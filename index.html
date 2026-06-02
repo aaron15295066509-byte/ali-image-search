@@ -3,30 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>以图搜同款 - 全平台</title>
+<title>以图搜同款 - 六大平台</title>
 <style>
   :root {
-    --bg: #f5f5f7;
-    --card: #ffffff;
-    --text: #1d1d1f;
-    --gray: #86868b;
-    --border: #d2d2d7;
-    --shadow: 0 8px 32px rgba(0,0,0,0.08);
+    --bg: #f5f5f7; --card: #ffffff; --text: #1d1d1f;
+    --gray: #86868b; --border: #d2d2d7; --shadow: 0 8px 32px rgba(0,0,0,0.08);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
+    background: var(--bg); color: var(--text); min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
   }
   .container { max-width: 720px; width: 100%; }
 
-  .header { text-align: center; margin-bottom: 28px; }
+  .header { text-align: center; margin-bottom: 24px; }
   .header h1 {
     font-size: 28px; font-weight: 700;
     background: linear-gradient(135deg, #FF4400, #FF6A00, #FF9900);
@@ -35,126 +26,102 @@
   }
   .header p { color: var(--gray); font-size: 14px; margin-top: 4px; }
 
-  .card {
-    background: var(--card);
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    padding: 28px;
-    margin-bottom: 16px;
-  }
+  .card { background: var(--card); border-radius: 20px; box-shadow: var(--shadow); padding: 24px; margin-bottom: 16px; }
 
   .dropzone {
-    border: 2px dashed var(--border);
-    border-radius: 16px;
-    padding: 40px 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    background: #fafafa;
-    position: relative;
-    overflow: hidden;
+    border: 2px dashed var(--border); border-radius: 16px; padding: 36px 20px;
+    text-align: center; cursor: pointer; transition: all 0.25s ease;
+    background: #fafafa; position: relative; overflow: hidden;
   }
   .dropzone:hover, .dropzone.dragover { border-color: #FF6A00; background: #fff8f0; }
   .dropzone.has-image { padding: 12px; cursor: default; }
   .dropzone-icon {
-    width: 56px; height: 56px; margin: 0 auto 12px;
+    width: 52px; height: 52px; margin: 0 auto 10px;
     background: #f0f0f0; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    transition: background 0.25s;
   }
   .dropzone:hover .dropzone-icon { background: #ffe8d6; }
-  .dropzone-icon svg { width: 28px; height: 28px; fill: var(--gray); }
-  .dropzone-text { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
-  .dropzone-hint { font-size: 13px; color: var(--gray); }
+  .dropzone-icon svg { width: 26px; height: 26px; fill: var(--gray); }
+  .dropzone-text { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+  .dropzone-hint { font-size: 12px; color: var(--gray); }
   .dropzone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 
   .preview-container { position: relative; display: none; }
   .preview-container.show { display: block; }
   .preview-container img {
-    max-width: 100%; max-height: 260px; border-radius: 12px;
+    max-width: 100%; max-height: 220px; border-radius: 12px;
     display: block; margin: 0 auto; object-fit: contain;
   }
   .preview-remove {
     position: absolute; top: 6px; right: 6px;
-    width: 28px; height: 28px; background: rgba(0,0,0,0.6); color: #fff;
-    border: none; border-radius: 50%; cursor: pointer; font-size: 16px; line-height: 28px; text-align: center;
+    width: 26px; height: 26px; background: rgba(0,0,0,0.6); color: #fff;
+    border: none; border-radius: 50%; cursor: pointer; font-size: 14px; line-height: 26px;
   }
   .preview-remove:hover { background: rgba(0,0,0,0.8); }
 
-  .url-row { display: flex; gap: 8px; margin-top: 14px; }
+  /* Tabs: URL vs Upload */
+  .tabs { display: flex; gap: 0; margin: 16px 0 12px; background: #f0f0f0; border-radius: 10px; padding: 3px; }
+  .tab {
+    flex: 1; padding: 8px 16px; text-align: center; border: none; border-radius: 8px;
+    background: transparent; font-size: 13px; font-weight: 500; cursor: pointer; color: var(--gray); transition: all 0.2s;
+  }
+  .tab.active { background: #fff; color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .url-row { display: flex; gap: 8px; }
   .url-row input {
     flex: 1; padding: 10px 14px; border: 1px solid var(--border);
-    border-radius: 10px; font-size: 14px; outline: none; transition: border 0.2s;
+    border-radius: 10px; font-size: 14px; outline: none;
   }
   .url-row input:focus { border-color: #FF6A00; }
   .url-row button {
-    padding: 10px 16px; background: var(--bg); border: 1px solid var(--border);
+    padding: 10px 16px; background: #f0f0f0; border: 1px solid var(--border);
     border-radius: 10px; cursor: pointer; font-size: 13px; color: var(--gray); white-space: nowrap;
   }
-  .url-row button:hover { background: #e8e8ed; color: var(--text); }
+  .url-row button:hover { background: #e0e0e0; color: var(--text); }
 
   .section-label {
     font-size: 13px; font-weight: 600; color: var(--gray);
-    margin: 16px 0 10px; display: flex; align-items: center; gap: 6px;
+    margin: 14px 0 8px; display: flex; align-items: center; gap: 6px;
   }
 
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  @media (max-width: 480px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 360px) { .grid { grid-template-columns: 1fr; } }
 
   .btn {
-    padding: 14px 16px; border: none; border-radius: 12px;
-    font-size: 14px; font-weight: 600; cursor: pointer;
+    padding: 12px 10px; border: none; border-radius: 12px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
     transition: all 0.2s ease; display: flex; align-items: center;
-    justify-content: center; gap: 8px; min-height: 52px;
+    justify-content: center; gap: 6px; min-height: 48px; line-height: 1.2;
   }
-  .btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn:disabled { opacity: 0.3; cursor: not-allowed; }
   .btn:not(:disabled):hover { transform: translateY(-1px); }
-  .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-  .btn-1688 { background: #FF4400; color: #fff; box-shadow: 0 2px 8px rgba(255,68,0,0.25); }
-  .btn-1688:not(:disabled):hover { box-shadow: 0 4px 16px rgba(255,68,0,0.35); }
-  .btn-taobao { background: #FF6A00; color: #fff; box-shadow: 0 2px 8px rgba(255,106,0,0.25); }
-  .btn-taobao:not(:disabled):hover { box-shadow: 0 4px 16px rgba(255,106,0,0.35); }
-  .btn-temu { background: #FF0000; color: #fff; box-shadow: 0 2px 8px rgba(255,0,0,0.25); }
-  .btn-temu:not(:disabled):hover { box-shadow: 0 4px 16px rgba(255,0,0,0.35); }
-  .btn-aliexpress { background: #E62E04; color: #fff; box-shadow: 0 2px 8px rgba(230,46,4,0.3); }
-  .btn-aliexpress:not(:disabled):hover { box-shadow: 0 4px 16px rgba(230,46,4,0.45); }
+  .btn-1688 { background: #FF4400; color: #fff; }
+  .btn-1688:not(:disabled):hover { box-shadow: 0 3px 12px rgba(255,68,0,0.35); }
+  .btn-taobao { background: #FF6A00; color: #fff; }
+  .btn-taobao:not(:disabled):hover { box-shadow: 0 3px 12px rgba(255,106,0,0.35); }
+  .btn-temu { background: #FF0000; color: #fff; }
+  .btn-temu:not(:disabled):hover { box-shadow: 0 3px 12px rgba(255,0,0,0.3); }
+  .btn-aliexpress { background: #E62E04; color: #fff; }
+  .btn-aliexpress:not(:disabled):hover { box-shadow: 0 3px 12px rgba(230,46,4,0.4); }
   .btn-amazon { background: #232F3E; color: #FF9900; }
-  .btn-amazon:not(:disabled):hover { box-shadow: 0 4px 16px rgba(35,47,62,0.35); }
+  .btn-amazon:not(:disabled):hover { box-shadow: 0 3px 12px rgba(35,47,62,0.4); }
   .btn-shein { background: #000; color: #fff; }
-  .btn-shein:not(:disabled):hover { box-shadow: 0 4px 16px rgba(0,0,0,0.35); }
+  .btn-shein:not(:disabled):hover { box-shadow: 0 3px 12px rgba(0,0,0,0.3); }
 
-  .tag {
-    padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 400;
-  }
-  .tag-auto { background: #22c55e; color: #fff; }
-  .tag-manual { background: #f59e0b; color: #fff; }
-
-  .loading { display: none; text-align: center; padding: 16px 0; }
-  .loading.show { display: block; }
-  .spinner {
-    width: 36px; height: 36px; margin: 0 auto 10px;
-    border: 3px solid #e8e8ed; border-top-color: #FF6A00;
-    border-radius: 50%; animation: spin 0.8s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .error { display: none; padding: 10px 14px; background: #fff0f0; border: 1px solid #ffd0d0; border-radius: 10px; color: #c00; font-size: 13px; margin-top: 12px; }
-  .error.show { display: block; }
+  .badge { font-size: 10px; padding: 1px 6px; border-radius: 10px; background: rgba(255,255,255,0.2); }
 
   .tip-box {
     margin-top: 14px; padding: 12px 14px;
     background: #f0f7ff; border: 1px solid #d0e4ff;
-    border-radius: 10px; font-size: 13px; color: #0066cc; line-height: 1.6;
+    border-radius: 10px; font-size: 13px; color: #0066cc; line-height: 1.7;
   }
-  .tip-box u { text-decoration: none; font-weight: 600; }
 
   .footer { text-align: center; padding: 16px; color: var(--gray); font-size: 12px; }
-
-  @media (max-width: 480px) {
-    body { padding: 20px 12px; }
-    .card { padding: 20px; }
-    .grid { grid-template-columns: 1fr; }
-  }
 </style>
 </head>
 <body>
@@ -162,198 +129,130 @@
 
   <div class="header">
     <h1>📸 以图搜同款</h1>
-    <p>上传商品图片 → 一键在六大电商平台搜索相似款式</p>
+    <p>六大电商平台 · 一键搜索相似款式</p>
   </div>
 
   <div class="card">
-    <!-- Upload area -->
+    <!-- 方式一：上传图片 -->
     <div class="dropzone" id="dropzone">
       <div class="preview-container" id="previewContainer">
-        <img id="previewImage" alt="商品图片">
+        <img id="previewImage" alt="">
         <button class="preview-remove" id="removeBtn">✕</button>
       </div>
       <div id="uploadPlaceholder">
         <div class="dropzone-icon">
           <svg viewBox="0 0 24 24"><path d="M12 4v12m0-12l-4 4m4-4l4 4m-9 8v2h10v-2"/></svg>
         </div>
-        <div class="dropzone-text">点击选择或拖拽图片到这里</div>
-        <div class="dropzone-hint">支持 JPG / PNG / WebP，最大 20MB</div>
+        <div class="dropzone-text">📤 上传商品图片</div>
+        <div class="dropzone-hint">拖拽或点击选择 · 支持JPG/PNG/WebP</div>
       </div>
-      <input type="file" id="fileInput" accept="image/*">
+      <input type="file" accept="image/*">
     </div>
 
-    <!-- URL input -->
-    <div class="url-row">
-      <input type="text" id="imageUrlInput" placeholder="或粘贴网络图片链接直接搜..." spellcheck="false">
-      <button id="urlBtn">使用</button>
+    <!-- 方式二：粘贴URL -->
+    <div class="url-row" style="margin-top:12px">
+      <input type="text" id="urlInput" placeholder="或粘贴商品图片链接直接搜索..." spellcheck="false">
+      <button id="urlBtn">→ 搜</button>
     </div>
 
-    <!-- Auto-search platforms (form POST) -->
-    <div class="section-label">🚀 自动搜索（图片直传平台）</div>
-    <div class="grid">
-      <button class="btn btn-1688" id="btn1688" disabled>
-        1688 <span class="tag tag-auto">自动</span>
-      </button>
-      <button class="btn btn-taobao" id="btnTaobao" disabled>
-        淘宝 <span class="tag tag-auto">自动</span>
-      </button>
-      <button class="btn btn-temu" id="btnTemu" disabled>
-        Temu <span class="tag tag-auto">自动</span>
-      </button>
+    <!-- 上传后的提示 -->
+    <div id="uploadHint" style="display:none; margin-top:10px; padding:10px 14px; background:#fef9e7; border:1px solid #fce4b0; border-radius:10px; font-size:13px; color:#856404; line-height:1.5;">
+      🖼️ 图片已预览 <br>
+      点击下方平台按钮 → 打开该平台图搜页 → <b>重新上传此图</b> 搜索
     </div>
 
-    <!-- Manual-search platforms -->
-    <div class="section-label">👆 手动搜索（打开页面→点📷上传）</div>
-    <div class="grid">
-      <button class="btn btn-aliexpress" id="btnAli" disabled>
-        AliExpress <span class="tag tag-manual">📷</span>
-      </button>
-      <button class="btn btn-amazon" id="btnAmazon" disabled>
-        Amazon <span class="tag tag-manual">📷</span>
-      </button>
-      <button class="btn btn-shein" id="btnShein" disabled>
-        SHEIN <span class="tag tag-manual">📷</span>
-      </button>
+    <!-- 平台按钮 -->
+    <div style="margin-top:16px">
+      <div class="section-label">🛒 选择平台</div>
+      <div class="grid" id="btnGrid">
+        <button class="btn btn-1688" data-platform="1688">
+          1688 <span class="badge">图搜</span>
+        </button>
+        <button class="btn btn-taobao" data-platform="taobao">
+          淘宝 <span class="badge">拍立淘</span>
+        </button>
+        <button class="btn btn-temu" data-platform="temu">
+          Temu <span class="badge">图搜</span>
+        </button>
+        <button class="btn btn-aliexpress" data-platform="aliexpress">
+          AliExpress <span class="badge">📷</span>
+        </button>
+        <button class="btn btn-amazon" data-platform="amazon">
+          Amazon <span class="badge">📷</span>
+        </button>
+        <button class="btn btn-shein" data-platform="shein">
+          SHEIN <span class="badge">📷</span>
+        </button>
+      </div>
     </div>
-
-    <div class="error" id="error"></div>
 
     <div class="tip-box">
-      💡 <u>自动</u> = 图片直接上传到平台搜索，无需第三方中转<br>
-      <u>手动</u> = 打开平台首页 → 搜框点📷手动上传<br>
-      推荐先用<strong>1688</strong>或<strong>淘宝</strong>，跨境卖家首选
+      💡 <b>推荐流程：</b><br>
+      ① 上传本地商品图 或 粘贴网络图片链接<br>
+      ② 点击平台按钮 → 打开该平台的搜图页面<br>
+      ③ 在打开的页面上传相同图片搜索同款<br><br>
+      🔥 <b>有图片链接时</b>（淘宝/1688商品图）：直接粘贴链接 → 选平台 → 自动搜
     </div>
   </div>
 
-  <div class="footer">
-    图片直接传送到各平台，不经过任何第三方服务器
-  </div>
+  <div class="footer">所有操作在您的浏览器本地完成，图片不经过任何第三方服务器</div>
 </div>
 
 <script>
+// ===== 元素引用 =====
 const dropzone = document.getElementById('dropzone');
-const fileInput = document.getElementById('fileInput');
+const fileInput = dropzone.querySelector('input[type="file"]');
 const previewContainer = document.getElementById('previewContainer');
 const previewImage = document.getElementById('previewImage');
 const removeBtn = document.getElementById('removeBtn');
 const uploadPlaceholder = document.getElementById('uploadPlaceholder');
-const error = document.getElementById('error');
-const imageUrlInput = document.getElementById('imageUrlInput');
+const uploadHint = document.getElementById('uploadHint');
+const urlInput = document.getElementById('urlInput');
 const urlBtn = document.getElementById('urlBtn');
+const grid = document.getElementById('btnGrid');
 
-const btns = {
-  1688: document.getElementById('btn1688'),
-  taobao: document.getElementById('btnTaobao'),
-  temu: document.getElementById('btnTemu'),
-  ali: document.getElementById('btnAli'),
-  amazon: document.getElementById('btnAmazon'),
-  shein: document.getElementById('btnShein'),
-};
-
-// Platform config
+// ===== 平台配置 =====
 const PLATFORMS = {
-  1688: {
-    type: 'auto',
-    action: 'https://s.1688.com/youyuan/index.htm',
-    field: 'image',
-    extraFields: { tab: 'imageSearch' },
+  '1688': {
+    name: '1688',
+    searchPage: 'https://s.1688.com/youyuan/index.htm',
+    urlSearch: 'https://s.1688.com/youyuan/index.htm?image=',
   },
-  taobao: {
-    type: 'auto',
-    action: 'https://s.taobao.com/search',
-    field: 'imgfile',
-    extraFields: {},
+  'taobao': {
+    name: '淘宝',
+    searchPage: 'https://s.taobao.com/search?imgfile=&q=',
+    urlSearch: 'https://s.taobao.com/search?imgfile=',
   },
-  temu: {
-    type: 'auto',
-    action: 'https://www.temu.com/search',
-    field: 'imageUrl',
-    extraFields: { search_type: 'image' },
+  'temu': {
+    name: 'Temu',
+    searchPage: 'https://www.temu.com/',
+    urlSearch: 'https://www.temu.com/search?search_type=image&imageUrl=',
   },
-  ali: { type: 'manual', url: 'https://www.aliexpress.com/' },
-  amazon: { type: 'manual', url: 'https://www.amazon.com/' },
-  shein: { type: 'manual', url: 'https://www.shein.com/' },
+  'aliexpress': {
+    name: 'AliExpress',
+    searchPage: 'https://www.aliexpress.com/',
+    urlSearch: null, // 不支持URL参数搜图
+  },
+  'amazon': {
+    name: 'Amazon',
+    searchPage: 'https://www.amazon.com/',
+    urlSearch: null,
+  },
+  'shein': {
+    name: 'SHEIN',
+    searchPage: 'https://www.shein.com/',
+    urlSearch: null,
+  },
 };
 
+// ===== 状态 =====
 let currentFile = null;
-let currentDataUrl = null;
-let currentBlob = null;
 
-// ===== Image search via form POST (no CORS issues) =====
-function searchByFormPost(blob, platformKey) {
-  const p = PLATFORMS[platformKey];
-  if (!p || p.type !== 'auto') return;
-
-  const form = document.createElement('form');
-  form.method = 'POST';
-  form.enctype = 'multipart/form-data';
-  form.target = '_blank';
-  form.style.display = 'none';
-
-  // Build action URL with extra fields
-  let actionUrl = p.action;
-  const params = new URLSearchParams();
-  if (p.extraFields) {
-    Object.entries(p.extraFields).forEach(([k, v]) => params.set(k, v));
-  }
-  const qs = params.toString();
-  if (qs) actionUrl += (actionUrl.includes('?') ? '&' : '?') + qs;
-  form.action = actionUrl;
-
-  // Add image file input
-  const dt = new DataTransfer();
-  const ext = blob.type === 'image/png' ? 'png' : 'jpg';
-  dt.items.add(new File([blob], `product.${ext}`, { type: blob.type }));
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.name = p.field;
-  input.files = dt.files;
-  form.appendChild(input);
-
-  document.body.appendChild(form);
-  form.submit();
-  document.body.removeChild(form);
-}
-
-// ===== Button handler =====
-function doSearch(platformKey) {
-  hideError();
-  const p = PLATFORMS[platformKey];
-  if (!p) return;
-
-  const urlInput = imageUrlInput.value.trim();
-
-  // Manual: just open homepage
-  if (p.type === 'manual') {
-    window.open(p.url, '_blank');
-    return;
-  }
-
-  // Auto: need an image
-  if (urlInput && urlInput.match(/^https?:\/\//i)) {
-    // User pasted a URL -> open search with URL param
-    let searchUrl = p.action;
-    const params = new URLSearchParams();
-    if (p.extraFields) Object.entries(p.extraFields).forEach(([k, v]) => params.set(k, v));
-    params.set(p.field, urlInput);
-    searchUrl += (searchUrl.includes('?') ? '&' : '?') + params.toString();
-    window.open(searchUrl, '_blank');
-    return;
-  }
-
-  if (!currentBlob) {
-    showError('请先选择一张商品图片'); return;
-  }
-
-  // Direct form POST
-  searchByFormPost(currentBlob, platformKey);
-}
-
-// ===== File handling =====
+// ===== 文件上传 =====
 fileInput.addEventListener('change', (e) => {
   const f = e.target.files[0];
   if (!f) return;
-  if (f.size > 20*1024*1024) { showError('图片超过20MB'); return; }
+  if (f.size > 20 * 1024 * 1024) { alert('图片超过20MB，请压缩后重试'); return; }
   loadFile(f);
 });
 
@@ -362,45 +261,28 @@ dropzone.addEventListener('dragleave', () => { dropzone.classList.remove('dragov
 dropzone.addEventListener('drop', (e) => {
   e.preventDefault(); dropzone.classList.remove('dragover');
   const f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith('image/')) {
-    if (f.size > 20*1024*1024) { showError('图片超过20MB'); return; }
-    loadFile(f);
-  }
+  if (!f || !f.type.startsWith('image/')) return;
+  if (f.size > 20*1024*1024) { alert('图片超过20MB'); return; }
+  loadFile(f);
 });
 
 function loadFile(file) {
   currentFile = file;
-  currentBlob = file;
   const reader = new FileReader();
-  reader.onload = (ev) => {
-    currentDataUrl = ev.target.result;
-    showPreview(currentDataUrl);
-    enableAll(true);
+  reader.onload = (e) => {
+    previewImage.src = e.target.result;
+    previewContainer.classList.add('show');
+    uploadPlaceholder.style.display = 'none';
+    dropzone.classList.add('has-image');
+    uploadHint.style.display = 'block';
   };
   reader.readAsDataURL(file);
 }
 
-removeBtn.addEventListener('click', (e) => { e.stopPropagation(); resetAll(); });
-imageUrlInput.addEventListener('input', updateBtnState);
-imageUrlInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') useUrl(); });
-urlBtn.addEventListener('click', useUrl);
-
-function useUrl() {
-  const url = imageUrlInput.value.trim();
-  if (!url) return;
-  currentDataUrl = url;
-  currentFile = null;
-  currentBlob = null;
-  showPreview(url);
-  enableAll(true);
-}
-
-function showPreview(src) {
-  previewImage.src = src;
-  previewContainer.classList.add('show');
-  uploadPlaceholder.style.display = 'none';
-  dropzone.classList.add('has-image');
-}
+removeBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  resetAll();
+});
 
 function resetAll() {
   previewContainer.classList.remove('show');
@@ -408,31 +290,69 @@ function resetAll() {
   dropzone.classList.remove('has-image');
   previewImage.src = '';
   currentFile = null;
-  currentDataUrl = null;
-  currentBlob = null;
   fileInput.value = '';
-  hideError();
-  updateBtnState();
+  uploadHint.style.display = 'none';
 }
 
-function enableAll(en) {
-  Object.values(btns).forEach(b => { b.disabled = !en; });
+// ===== URL输入 =====
+urlInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') searchByUrl(); });
+urlBtn.addEventListener('click', searchByUrl);
+
+function searchByUrl() {
+  const url = urlInput.value.trim();
+  if (!url || !url.match(/^https?:\/\//i)) {
+    alert('请输入有效的图片链接（以 http:// 或 https:// 开头）');
+    return;
+  }
+  // 如果用户已选平台，直接搜；否则先清空上传状态，让ta点平台按钮
+  // 先设置一个全局变量供平台按钮使用
+  window._pendingUrl = url;
+  uploadHint.textContent = '🔗 图片链接已就绪，点击下方平台按钮搜索';
+  uploadHint.style.display = 'block';
 }
 
-function updateBtnState() {
-  const has = !!(currentDataUrl || imageUrlInput.value.trim());
-  enableAll(has);
-}
+// ===== 平台按钮点击 =====
+grid.addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-platform]');
+  if (!btn) return;
+  const platform = btn.dataset.platform;
+  const config = PLATFORMS[platform];
+  if (!config) return;
 
-function showError(msg) { error.textContent = msg; error.classList.add('show'); }
-function hideError() { error.classList.remove('show'); }
+  // 1) 优先使用URL参数搜图（如果用户粘贴了链接且该平台支持）
+  const pendingUrl = window._pendingUrl || '';
+  if (pendingUrl && config.urlSearch) {
+    window.open(config.urlSearch + encodeURIComponent(pendingUrl), '_blank');
+    window._pendingUrl = null;
+    return;
+  }
 
-// Bind buttons
-Object.keys(btns).forEach(k => {
-  btns[k].addEventListener('click', () => doSearch(k));
+  // 2) 如果有上传的图片，提示用户在打开的页面上传
+  if (currentFile) {
+    window.open(config.searchPage, '_blank');
+    return;
+  }
+
+  // 3) 如果URL输入框有链接且平台不支持URL搜图
+  const urlInputVal = urlInput.value.trim();
+  if (urlInputVal && !config.urlSearch) {
+    window.open(config.searchPage, '_blank');
+    return;
+  }
+
+  // 如果什么也没有
+  if (!urlInputVal && !currentFile) {
+    alert('请先上传图片或粘贴图片链接');
+    return;
+  }
+
+  // 有URL但还没点"使用"按钮
+  if (urlInputVal && config.urlSearch) {
+    window.open(config.urlSearch + encodeURIComponent(urlInputVal), '_blank');
+  } else {
+    window.open(config.searchPage, '_blank');
+  }
 });
-
-updateBtnState();
 </script>
 </body>
 </html>

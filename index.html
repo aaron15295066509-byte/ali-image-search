@@ -77,74 +77,57 @@
   .preview-remove {
     position: absolute; top: 6px; right: 6px;
     width: 28px; height: 28px; background: rgba(0,0,0,0.6); color: #fff;
-    border: none; border-radius: 50%; cursor: pointer;
-    font-size: 16px; line-height: 28px; text-align: center;
+    border: none; border-radius: 50%; cursor: pointer; font-size: 16px; line-height: 28px; text-align: center;
   }
   .preview-remove:hover { background: rgba(0,0,0,0.8); }
 
   .url-row { display: flex; gap: 8px; margin-top: 14px; }
   .url-row input {
     flex: 1; padding: 10px 14px; border: 1px solid var(--border);
-    border-radius: 10px; font-size: 14px; outline: none;
-    transition: border 0.2s;
+    border-radius: 10px; font-size: 14px; outline: none; transition: border 0.2s;
   }
   .url-row input:focus { border-color: #FF6A00; }
   .url-row button {
     padding: 10px 16px; background: var(--bg); border: 1px solid var(--border);
-    border-radius: 10px; cursor: pointer; font-size: 13px; color: var(--gray);
-    white-space: nowrap; transition: all 0.2s;
+    border-radius: 10px; cursor: pointer; font-size: 13px; color: var(--gray); white-space: nowrap;
   }
   .url-row button:hover { background: #e8e8ed; color: var(--text); }
 
-  /* Platforms */
   .section-label {
     font-size: 13px; font-weight: 600; color: var(--gray);
     margin: 16px 0 10px; display: flex; align-items: center; gap: 6px;
   }
 
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
   .btn {
-    padding: 14px 16px;
-    border: none;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    text-decoration: none;
-    min-height: 52px;
+    padding: 14px 16px; border: none; border-radius: 12px;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s ease; display: flex; align-items: center;
+    justify-content: center; gap: 8px; min-height: 52px;
   }
   .btn:disabled { opacity: 0.35; cursor: not-allowed; }
   .btn:not(:disabled):hover { transform: translateY(-1px); }
   .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
 
-  /* Platform colors */
   .btn-1688 { background: #FF4400; color: #fff; box-shadow: 0 2px 8px rgba(255,68,0,0.25); }
   .btn-1688:not(:disabled):hover { box-shadow: 0 4px 16px rgba(255,68,0,0.35); }
   .btn-taobao { background: #FF6A00; color: #fff; box-shadow: 0 2px 8px rgba(255,106,0,0.25); }
   .btn-taobao:not(:disabled):hover { box-shadow: 0 4px 16px rgba(255,106,0,0.35); }
   .btn-temu { background: #FF0000; color: #fff; box-shadow: 0 2px 8px rgba(255,0,0,0.25); }
   .btn-temu:not(:disabled):hover { box-shadow: 0 4px 16px rgba(255,0,0,0.35); }
-
-  .btn-aliexpress { background: #E62E04; color: #fff; box-shadow: 0 2px 8px rgba(230,46,4,0.25); }
-  .btn-aliexpress:not(:disabled):hover { box-shadow: 0 4px 16px rgba(230,46,4,0.35); }
+  .btn-aliexpress { background: #E62E04; color: #fff; box-shadow: 0 2px 8px rgba(230,46,4,0.3); }
+  .btn-aliexpress:not(:disabled):hover { box-shadow: 0 4px 16px rgba(230,46,4,0.45); }
   .btn-amazon { background: #232F3E; color: #FF9900; }
   .btn-amazon:not(:disabled):hover { box-shadow: 0 4px 16px rgba(35,47,62,0.35); }
   .btn-shein { background: #000; color: #fff; }
   .btn-shein:not(:disabled):hover { box-shadow: 0 4px 16px rgba(0,0,0,0.35); }
 
-  .badge-auto { background: rgba(255,255,255,0.25); padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 400; }
-  .badge-auto-1688 { background: rgba(255,255,255,0.25); }
-  .badge-manual { background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 400; }
+  .tag {
+    padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 400;
+  }
+  .tag-auto { background: #22c55e; color: #fff; }
+  .tag-manual { background: #f59e0b; color: #fff; }
 
   .loading { display: none; text-align: center; padding: 16px 0; }
   .loading.show { display: block; }
@@ -154,30 +137,22 @@
     border-radius: 50%; animation: spin 0.8s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-text { color: var(--gray); font-size: 14px; }
 
   .error { display: none; padding: 10px 14px; background: #fff0f0; border: 1px solid #ffd0d0; border-radius: 10px; color: #c00; font-size: 13px; margin-top: 12px; }
   .error.show { display: block; }
 
   .tip-box {
-    margin-top: 14px;
-    padding: 12px 14px;
-    background: #f0f7ff;
-    border: 1px solid #d0e4ff;
-    border-radius: 10px;
-    font-size: 13px;
-    color: #0066cc;
-    line-height: 1.6;
+    margin-top: 14px; padding: 12px 14px;
+    background: #f0f7ff; border: 1px solid #d0e4ff;
+    border-radius: 10px; font-size: 13px; color: #0066cc; line-height: 1.6;
   }
-  .tip-box strong { color: #004499; }
+  .tip-box u { text-decoration: none; font-weight: 600; }
 
   .footer { text-align: center; padding: 16px; color: var(--gray); font-size: 12px; }
 
   @media (max-width: 480px) {
     body { padding: 20px 12px; }
     .card { padding: 20px; }
-    .header h1 { font-size: 24px; }
-    .dropzone { padding: 28px 16px; }
     .grid { grid-template-columns: 1fr; }
   }
 </style>
@@ -191,6 +166,7 @@
   </div>
 
   <div class="card">
+    <!-- Upload area -->
     <div class="dropzone" id="dropzone">
       <div class="preview-container" id="previewContainer">
         <img id="previewImage" alt="商品图片">
@@ -206,251 +182,206 @@
       <input type="file" id="fileInput" accept="image/*">
     </div>
 
+    <!-- URL input -->
     <div class="url-row">
-      <input type="text" id="imageUrlInput" placeholder="或粘贴图片链接直接搜索..." spellcheck="false">
+      <input type="text" id="imageUrlInput" placeholder="或粘贴网络图片链接直接搜..." spellcheck="false">
       <button id="urlBtn">使用</button>
     </div>
 
-    <!-- Auto-search platforms -->
-    <div class="section-label">🤖 自动搜索（上传即搜）</div>
+    <!-- Auto-search platforms (form POST) -->
+    <div class="section-label">🚀 自动搜索（图片直传平台）</div>
     <div class="grid">
       <button class="btn btn-1688" id="btn1688" disabled>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
-        1688 <span class="badge-auto">自动</span>
+        1688 <span class="tag tag-auto">自动</span>
       </button>
       <button class="btn btn-taobao" id="btnTaobao" disabled>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="14" r="5"/><circle cx="10" cy="14" r="2"/><path d="M14 10C12 6 8 4 4 4c1 4 2 7 5 9"/><path d="M3 20c4-2 8-2 12 0"/></svg>
-        淘宝 <span class="badge-auto">自动</span>
+        淘宝 <span class="tag tag-auto">自动</span>
       </button>
       <button class="btn btn-temu" id="btnTemu" disabled>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-        Temu <span class="badge-auto">自动</span>
+        Temu <span class="tag tag-auto">自动</span>
       </button>
     </div>
 
     <!-- Manual-search platforms -->
-    <div class="section-label">👆 手动搜索（打开后点击📷上传）</div>
+    <div class="section-label">👆 手动搜索（打开页面→点📷上传）</div>
     <div class="grid">
       <button class="btn btn-aliexpress" id="btnAli" disabled>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M12 22V12"/></svg>
-        AliExpress <span class="badge-manual">📷</span>
+        AliExpress <span class="tag tag-manual">📷</span>
       </button>
       <button class="btn btn-amazon" id="btnAmazon" disabled>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        Amazon <span class="badge-manual">📷</span>
+        Amazon <span class="tag tag-manual">📷</span>
       </button>
       <button class="btn btn-shein" id="btnShein" disabled>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        SHEIN <span class="badge-manual">📷</span>
+        SHEIN <span class="tag tag-manual">📷</span>
       </button>
-    </div>
-
-    <!-- Loading -->
-    <div class="loading" id="loading">
-      <div class="spinner"></div>
-      <div class="loading-text" id="loadingText">正在处理...</div>
     </div>
 
     <div class="error" id="error"></div>
 
-    <div class="tip-box" id="tipBox">
-      💡 <strong>自动</strong> = 上传图片后自动跳转搜索页<br>
-      <strong>手动</strong> = 打开平台首页，在搜索框点击 <b>📷 相机图标</b> 手动上传图片搜索<br>
-      <strong>1688/淘宝</strong> 图搜最准，跨境卖家首选
+    <div class="tip-box">
+      💡 <u>自动</u> = 图片直接上传到平台搜索，无需第三方中转<br>
+      <u>手动</u> = 打开平台首页 → 搜框点📷手动上传<br>
+      推荐先用<strong>1688</strong>或<strong>淘宝</strong>，跨境卖家首选
     </div>
   </div>
 
   <div class="footer">
-    图片仅用于搜索，不上传到我们的服务器 · 图片通过 sm.ms 免费图床暂存
+    图片直接传送到各平台，不经过任何第三方服务器
   </div>
 </div>
 
 <script>
-// ===== DOM refs =====
 const dropzone = document.getElementById('dropzone');
 const fileInput = document.getElementById('fileInput');
 const previewContainer = document.getElementById('previewContainer');
 const previewImage = document.getElementById('previewImage');
 const removeBtn = document.getElementById('removeBtn');
 const uploadPlaceholder = document.getElementById('uploadPlaceholder');
-const loading = document.getElementById('loading');
-const loadingText = document.getElementById('loadingText');
 const error = document.getElementById('error');
 const imageUrlInput = document.getElementById('imageUrlInput');
 const urlBtn = document.getElementById('urlBtn');
-const tipBox = document.getElementById('tipBox');
 
-const buttons = {
-  '1688': document.getElementById('btn1688'),
-  'taobao': document.getElementById('btnTaobao'),
-  'temu': document.getElementById('btnTemu'),
-  'aliexpress': document.getElementById('btnAli'),
-  'amazon': document.getElementById('btnAmazon'),
-  'shein': document.getElementById('btnShein'),
+const btns = {
+  1688: document.getElementById('btn1688'),
+  taobao: document.getElementById('btnTaobao'),
+  temu: document.getElementById('btnTemu'),
+  ali: document.getElementById('btnAli'),
+  amazon: document.getElementById('btnAmazon'),
+  shein: document.getElementById('btnShein'),
+};
+
+// Platform config
+const PLATFORMS = {
+  1688: {
+    type: 'auto',
+    action: 'https://s.1688.com/youyuan/index.htm',
+    field: 'image',
+    extraFields: { tab: 'imageSearch' },
+  },
+  taobao: {
+    type: 'auto',
+    action: 'https://s.taobao.com/search',
+    field: 'imgfile',
+    extraFields: {},
+  },
+  temu: {
+    type: 'auto',
+    action: 'https://www.temu.com/search',
+    field: 'imageUrl',
+    extraFields: { search_type: 'image' },
+  },
+  ali: { type: 'manual', url: 'https://www.aliexpress.com/' },
+  amazon: { type: 'manual', url: 'https://www.amazon.com/' },
+  shein: { type: 'manual', url: 'https://www.shein.com/' },
 };
 
 let currentFile = null;
 let currentDataUrl = null;
+let currentBlob = null;
 
-// ===== Platform config =====
-const PLATFORMS = {
-  '1688': {
-    name: '1688',
-    type: 'auto',
-    searchUrl: 'https://s.1688.com/youyuan/index.htm',
-    searchParam: 'image',
-    homepage: 'https://www.1688.com/',
-    color: '#FF4400',
-  },
-  'taobao': {
-    name: '淘宝',
-    type: 'auto',
-    searchUrl: 'https://s.taobao.com/search',
-    searchParam: 'imgfile',
-    homepage: 'https://www.taobao.com/',
-    color: '#FF6A00',
-  },
-  'temu': {
-    name: 'Temu',
-    type: 'auto',
-    searchUrl: 'https://www.temu.com/search',
-    searchParam: 'search_type=image&imageUrl',
-    homepage: 'https://www.temu.com/',
-    color: '#FF0000',
-  },
-  'aliexpress': {
-    name: 'AliExpress',
-    type: 'manual',
-    homepage: 'https://www.aliexpress.com/',
-    color: '#E62E04',
-  },
-  'amazon': {
-    name: 'Amazon',
-    type: 'manual',
-    homepage: 'https://www.amazon.com/',
-    color: '#232F3E',
-  },
-  'shein': {
-    name: 'SHEIN',
-    type: 'manual',
-    homepage: 'https://www.shein.com/',
-    color: '#000',
-  },
-};
-
-// ===== Image hosting =====
-async function uploadToFreeHosting(base64Data) {
-  const resp = await fetch(base64Data);
-  const blob = await resp.blob();
-  const ext = blob.type === 'image/png' ? 'png' : 'jpg';
-  const formData = new FormData();
-  formData.append('smfile', blob, `product.${ext}`);
-  const uploadResp = await fetch('https://sm.ms/api/v2/upload', {
-    method: 'POST', body: formData
-  });
-  const json = await uploadResp.json();
-  if (!json.success) throw new Error(json.message || '上传失败');
-  return json.data.url || json.data.url_short;
-}
-
-// ===== Search =====
-function searchAuto(platformKey, imageUrl) {
+// ===== Image search via form POST (no CORS issues) =====
+function searchByFormPost(blob, platformKey) {
   const p = PLATFORMS[platformKey];
   if (!p || p.type !== 'auto') return;
 
-  let searchUrl;
-  if (p.searchParam.includes('=')) {
-    // Multi-param: search_type=image&imageUrl
-    searchUrl = `${p.searchUrl}?${p.searchParam}=${encodeURIComponent(imageUrl)}`;
-  } else {
-    searchUrl = `${p.searchUrl}?${p.searchParam}=${encodeURIComponent(imageUrl)}`;
-  }
-  window.open(searchUrl, '_blank');
-}
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.enctype = 'multipart/form-data';
+  form.target = '_blank';
+  form.style.display = 'none';
 
-function searchManual(platformKey) {
-  const p = PLATFORMS[platformKey];
-  window.open(p.homepage, '_blank');
+  // Build action URL with extra fields
+  let actionUrl = p.action;
+  const params = new URLSearchParams();
+  if (p.extraFields) {
+    Object.entries(p.extraFields).forEach(([k, v]) => params.set(k, v));
+  }
+  const qs = params.toString();
+  if (qs) actionUrl += (actionUrl.includes('?') ? '&' : '?') + qs;
+  form.action = actionUrl;
+
+  // Add image file input
+  const dt = new DataTransfer();
+  const ext = blob.type === 'image/png' ? 'png' : 'jpg';
+  dt.items.add(new File([blob], `product.${ext}`, { type: blob.type }));
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.name = p.field;
+  input.files = dt.files;
+  form.appendChild(input);
+
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
 }
 
 // ===== Button handler =====
-async function doSearch(platformKey) {
+function doSearch(platformKey) {
   hideError();
-
-  let urlInput = imageUrlInput.value.trim();
-  let imageToSearch = urlInput || currentDataUrl;
-
-  if (!imageToSearch) {
-    showError('请先选择或粘贴一张商品图片'); return;
-  }
-
   const p = PLATFORMS[platformKey];
+  if (!p) return;
 
-  // Manual platforms: just open the site
+  const urlInput = imageUrlInput.value.trim();
+
+  // Manual: just open homepage
   if (p.type === 'manual') {
-    searchManual(platformKey);
-    showLoading(`正在打开 ${p.name}...`);
-    setTimeout(hideLoading, 1000);
+    window.open(p.url, '_blank');
     return;
   }
 
-  // Auto platforms: need public URL
-  // If user provided a direct image URL, use it directly
+  // Auto: need an image
   if (urlInput && urlInput.match(/^https?:\/\//i)) {
-    searchAuto(platformKey, urlInput);
+    // User pasted a URL -> open search with URL param
+    let searchUrl = p.action;
+    const params = new URLSearchParams();
+    if (p.extraFields) Object.entries(p.extraFields).forEach(([k, v]) => params.set(k, v));
+    params.set(p.field, urlInput);
+    searchUrl += (searchUrl.includes('?') ? '&' : '?') + params.toString();
+    window.open(searchUrl, '_blank');
     return;
   }
 
-  // Otherwise upload the image
-  showLoading('正在上传图片...');
-
-  try {
-    const publicUrl = await uploadToFreeHosting(currentDataUrl);
-    hideLoading();
-    showLoading(`正在跳转到 ${p.name} 搜索结果...`);
-    searchAuto(platformKey, publicUrl);
-    setTimeout(hideLoading, 1500);
-  } catch (err) {
-    hideLoading();
-    showError(`${p.name} 搜索失败：${err.message}。请手动在 ${p.name} 上传图片搜索。`);
-    window.open(p.homepage, '_blank');
+  if (!currentBlob) {
+    showError('请先选择一张商品图片'); return;
   }
+
+  // Direct form POST
+  searchByFormPost(currentBlob, platformKey);
 }
 
 // ===== File handling =====
 fileInput.addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-  if (file.size > 20 * 1024 * 1024) {
-    showError('图片太大，请选择 20MB 以内的图片'); return;
-  }
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    currentDataUrl = ev.target.result;
-    currentFile = file;
-    showPreview(currentDataUrl, file.name);
-    enableButtons();
-  };
-  reader.readAsDataURL(file);
+  const f = e.target.files[0];
+  if (!f) return;
+  if (f.size > 20*1024*1024) { showError('图片超过20MB'); return; }
+  loadFile(f);
 });
 
 dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
 dropzone.addEventListener('dragleave', () => { dropzone.classList.remove('dragover'); });
 dropzone.addEventListener('drop', (e) => {
   e.preventDefault(); dropzone.classList.remove('dragover');
-  const file = e.dataTransfer.files[0];
-  if (!file || !file.type.startsWith('image/')) return;
-  if (file.size > 20 * 1024 * 1024) { showError('图片太大'); return; }
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    currentDataUrl = ev.target.result; currentFile = file;
-    showPreview(currentDataUrl, file.name); enableButtons();
-  };
-  reader.readAsDataURL(file);
+  const f = e.dataTransfer.files[0];
+  if (f && f.type.startsWith('image/')) {
+    if (f.size > 20*1024*1024) { showError('图片超过20MB'); return; }
+    loadFile(f);
+  }
 });
 
-removeBtn.addEventListener('click', (e) => { e.stopPropagation(); resetUpload(); });
-imageUrlInput.addEventListener('input', enableButtons);
+function loadFile(file) {
+  currentFile = file;
+  currentBlob = file;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    currentDataUrl = ev.target.result;
+    showPreview(currentDataUrl);
+    enableAll(true);
+  };
+  reader.readAsDataURL(file);
+}
+
+removeBtn.addEventListener('click', (e) => { e.stopPropagation(); resetAll(); });
+imageUrlInput.addEventListener('input', updateBtnState);
 imageUrlInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') useUrl(); });
 urlBtn.addEventListener('click', useUrl);
 
@@ -459,59 +390,49 @@ function useUrl() {
   if (!url) return;
   currentDataUrl = url;
   currentFile = null;
-  showPreview(url, '网络图片');
-  enableButtons();
+  currentBlob = null;
+  showPreview(url);
+  enableAll(true);
 }
 
-function showPreview(src, name) {
+function showPreview(src) {
   previewImage.src = src;
   previewContainer.classList.add('show');
   uploadPlaceholder.style.display = 'none';
   dropzone.classList.add('has-image');
 }
 
-function resetUpload() {
+function resetAll() {
   previewContainer.classList.remove('show');
   uploadPlaceholder.style.display = '';
   dropzone.classList.remove('has-image');
   previewImage.src = '';
   currentFile = null;
   currentDataUrl = null;
+  currentBlob = null;
   fileInput.value = '';
-  enableButtons();
   hideError();
+  updateBtnState();
 }
 
-function enableButtons() {
-  const hasImage = !!(currentDataUrl || imageUrlInput.value.trim());
-  Object.values(buttons).forEach(b => { b.disabled = !hasImage; });
+function enableAll(en) {
+  Object.values(btns).forEach(b => { b.disabled = !en; });
 }
 
-function showLoading(text) {
-  loadingText.textContent = text || '请稍候...';
-  loading.classList.add('show');
+function updateBtnState() {
+  const has = !!(currentDataUrl || imageUrlInput.value.trim());
+  enableAll(has);
 }
 
-function hideLoading() {
-  loading.classList.remove('show');
-}
+function showError(msg) { error.textContent = msg; error.classList.add('show'); }
+function hideError() { error.classList.remove('show'); }
 
-function showError(msg) {
-  error.textContent = msg;
-  error.classList.add('show');
-}
-
-function hideError() {
-  error.classList.remove('show');
-}
-
-// ===== Bind buttons =====
-Object.keys(buttons).forEach(key => {
-  buttons[key].addEventListener('click', () => doSearch(key));
+// Bind buttons
+Object.keys(btns).forEach(k => {
+  btns[k].addEventListener('click', () => doSearch(k));
 });
 
-// ===== Init =====
-enableButtons();
+updateBtnState();
 </script>
 </body>
 </html>
